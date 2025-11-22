@@ -37,9 +37,6 @@ BlockTrack is a dual-layer anti-counterfeit protocol combining physical seals wi
 
 **Backend**
 * Node.js, Express.js
-* SHA-256 Cryptography
-* In-memory append-only ledger (MongoDB supported)
-
 ---
 
 ## 🚀 System Flow
@@ -59,7 +56,6 @@ Follow this guide to set up the project locally.
 ### Prerequisites
 
 * **[Node.js](https://nodejs.org/)** (Version 16.20.1 or higher)
-* **MongoDB Cluster** (Free Tier or higher)
 
 ### 1. Clone the Repository
 
