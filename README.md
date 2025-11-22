@@ -1,111 +1,68 @@
-BlockTrack
-Supply Chain Verification Protocol (V2.0)
+# BlockTrack Supply Chain Verification Protocol (V2.0)
 
-Trustless transparency for real-world products.
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Version](https://img.shields.io/badge/version-2.0-green.svg)
+![Status](https://img.shields.io/badge/status-Active-success.svg)
 
-Overview
+> **Trustless transparency for real-world products.**
 
-BlockTrack is a dual-layer anti-counterfeit protocol combining physical seals with cryptographic verification.
-Standard QR codes can be copied. BlockTrack cannot.
+## 📖 Overview
 
-Why It Exists
-Problem
+BlockTrack is a dual-layer anti-counterfeit protocol combining physical seals with cryptographic verification. Standard QR codes can be copied. **BlockTrack cannot.**
 
-QR codes are easily cloned.
+### Why It Exists
 
-Copy genuine code → paste on fake product → system fails.
+| 🔴 The Problem | 🟢 The Solution: Dual-Key Identity |
+| :--- | :--- |
+| **QR codes are easily cloned.** | Each product receives two keys: |
+| Copy genuine code → paste on fake product → system fails. | 1. **Public ID** (Printed on packaging)<br>2. **Private Key** (Hidden under scratch-off seal) |
+| Consumers can't verify authenticity. | **Trust the math, not the manufacturer.** |
 
-Solution: Dual-Key Identity
+---
 
-Each product receives:
+## 🔐 Security Model
 
-Public ID — printed on packaging
+1.  **Physical Lock:** Private Key protected by a scratch-off layer.
+2.  **Digital Lock:** Once the Private Key is claimed, the product becomes **CONSUMED** on-chain.
+3.  **Counterfeit Trap:** Any re-scan of a consumed ID triggers a **🔴 "Product Has Been Claimed Before"** warning.
 
-Private Key — hidden under scratch-off seal
+---
 
-Once the private key is claimed, the product becomes CONSUMED on-chain.
-Any later scans expose counterfeits instantly.
-Trust the math, not the manufacturer.
+## 🛠 Tech Stack
 
-Security Model
+**Frontend**
+* React, Vite, Tailwind CSS
+* Axios, Lucide Icons, Native Camera API
+* **Modes:** Public Verify / Private Claim
 
-Physical Lock: Private Key protected by scratch layer.
+**Backend**
+* Node.js, Express.js
+* SHA-256 Cryptography
+* In-memory append-only ledger (MongoDB supported)
 
-Digital Lock: Claimed Private Key permanently marks the asset as consumed.
+---
 
-Counterfeit Trap: Re-scan of consumed ID → “Product Has Been Claimed Before”.
+## 🚀 System Flow
 
-Tech Stack
+1.  **Minting:** Manufacturer mints asset → Gets Public QR + Sealed Private Key.
+2.  **Logistics:** Simulation of flow (Factory → Truck → Pharmacy).
+3.  **Verify (Consumer):** Scans Public ID → Sees **VERIFIED** + Supply chain timeline.
+4.  **Claim (Consumer):** Scratches seal & enters Private Key → Backend verifies → Status = **CONSUMED**.
+5.  **Trap:** Re-scanning this ID now triggers a red counterfeit warning.
 
-Frontend: React, Vite, Tailwind, Axios, Lucide Icons, Native Camera API
-Backend: Node.js, Express, SHA-256 Crypto, In-memory append-only ledger
+---
 
-What’s Inside
-Backend
+## ⚙️ Setup and Configuration
 
-POST /mint – create Public + Private keys
+Follow this guide to set up the project locally.
 
-GET /scan/:id – check asset status + history
+### Prerequisites
 
-POST /claim – verify private key + mark consumed
+* **[Node.js](https://nodejs.org/)** (Version 16.20.1 or higher)
+* **MongoDB Cluster** (Free Tier or higher)
 
-Frontend
+### 1. Clone the Repository
 
-Dark SaaS UI
-
-Full-screen QR Scanner
-
-Supply-chain timeline visualizer
-
-Modes: Public Verify / Private Claim
-
-System Flow
-
-Manufacturer mints asset → gets Public QR + sealed Private Key
-
-Logistics flow simulated (Factory → Truck → Pharmacy)
-
-Consumer Verify scans Public ID → sees VERIFIED + timeline
-
-Consumer Claim enters Private Key → backend verifies → status = CONSUMED
-
-Re-scan triggers red counterfeit warning
-
-Folder Structure
-blocktrack-bitmin/
-├── backend/
-│   ├── server.js
-│   ├── routes/
-│   ├── controllers/
-│   ├── utils/
-│   └── package.json
-└── frontend/
-    ├── src/
-    ├── public/
-    ├── package.json
-    └── vite.config.js
-
-Run Locally
-Clone
-git clone https://github.com/pushkarthisside/blocktrack-bitmin
+```bash
+git clone [https://github.com/pushkarthisside/blocktrack-bitmin](https://github.com/pushkarthisside/blocktrack-bitmin)
 cd blocktrack-bitmin
-
-Backend
-cd backend
-npm install
-node server.js
-
-
-Backend runs at: http://localhost:5000
-
-Frontend
-cd ../frontend
-npm install
-npm run dev
-
-
-Frontend runs at: http://localhost:5173
-
-License
-
-MIT License — open, simple, and permissive.
